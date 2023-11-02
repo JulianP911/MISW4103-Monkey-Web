@@ -13,7 +13,7 @@ describe('Los estudiantes under monkeys', function() {
 function randomEvent(numEvents) {
 
     // Definición de los cuatro tipos de eventos definidos y selección random del evento
-    let events = ['link', 'input', 'combo', 'button'];
+    let events = ['link', 'input', 'select', 'button'];
     let generateRandomEvent = () => events[Math.floor(Math.random() * events.length)];
     let getRandomInt = (min, max) => {
         min = Math.ceil(min);
@@ -26,8 +26,8 @@ function randomEvent(numEvents) {
     var numEvents = numEvents;
     if(numEvents > 0) {
         switch (generateRandomEvent()) {
-            case 'a':
-                cy.get("body").then($body => {
+            case 'link':
+                cy.get('body').then($body => {
                     if ($body.find('a').length > 0) {
                         cy.get('a').then($links => {
                             var randomLink = $links.get(getRandomInt(0, $links.length));
@@ -40,7 +40,7 @@ function randomEvent(numEvents) {
                 });
                 break;
             case 'input':
-                cy.get("body").then($body => {
+                cy.get('body').then($body => {
                     if ($body.find('input').length > 0) {
                         cy.get('input').then($inputs => {
                             var randomInput = $inputs.get(getRandomInt(0, $inputs.length));
@@ -52,8 +52,8 @@ function randomEvent(numEvents) {
                     }
                 });
                 break;
-            case 'combo':
-                cy.get("body").then($body => {
+            case 'select':
+                cy.get('body').then($body => {
                     if ($body.find('select').length > 0) {
                         cy.get('select').then($selects => {
                             var randomSelect = $selects.get(getRandomInt(0, $selects.length));
@@ -67,7 +67,7 @@ function randomEvent(numEvents) {
                 });
                 break;
             case 'button':
-                cy.get("body").then($body => {
+                cy.get('body').then($body => {
                     if ($body.find('button').length > 0) {
                         cy.get('button').then($buttons => {
                             var randomButton = $buttons.get(getRandomInt(0, $buttons.length));
