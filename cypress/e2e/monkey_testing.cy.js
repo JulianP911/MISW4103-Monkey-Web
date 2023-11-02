@@ -1,13 +1,19 @@
+// Método inicializador del monkey tests sobre el sitio web LosEstudiantes
 describe('Los estudiantes under monkeys', function() {
     it('visits los estudiantes and survives monkeys', function() {
         cy.visit('https://losestudiantes.co');
         cy.wait(1000);
+
+        // Invocación del método recursivo randomEvent estableciendo 20 eventos
         randomEvent(20);
     })
 })
 
+// Método recursivo randomEvent que recibe como parámetro el número de eventos
 function randomEvent(numEvents) {
-    let events = ['link', 'input', 'select', 'button'];
+
+    // Definición de los cuatro tipos de eventos definidos y selección random del evento
+    let events = ['link', 'input', 'combo', 'button'];
     let generateRandomEvent = () => events[Math.floor(Math.random() * events.length)];
     let getRandomInt = (min, max) => {
         min = Math.ceil(min);
@@ -15,10 +21,12 @@ function randomEvent(numEvents) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
+    // Identificación del evento random y ejecución del monkey sobre el evento determinado aleatoreamente
+    // Una vez se ejecuta el evento se reduce la cantidad de eventos y se realiza un llamado recursivo hasta que no quede ninguno
     var numEvents = numEvents;
     if(numEvents > 0) {
         switch (generateRandomEvent()) {
-            case 'link':
+            case 'a':
                 cy.get("body").then($body => {
                     if ($body.find('a').length > 0) {
                         cy.get('a').then($links => {
@@ -44,7 +52,7 @@ function randomEvent(numEvents) {
                     }
                 });
                 break;
-            case 'select':
+            case 'combo':
                 cy.get("body").then($body => {
                     if ($body.find('select').length > 0) {
                         cy.get('select').then($selects => {
